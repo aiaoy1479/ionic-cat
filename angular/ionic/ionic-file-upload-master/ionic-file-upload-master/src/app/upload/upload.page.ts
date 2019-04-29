@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { UploadingService } from '../uploading.service';
 
+import { Storage, LocalStorage } from '@ionic/angular';
+
 import { FileUploader, FileLikeObject } from 'ng2-file-upload';
 import { concat } from 'rxjs';
 
@@ -16,13 +18,17 @@ export class UploadPage implements OnInit {
 
   public fileUploader: FileUploader = new FileUploader({});
   public hasBaseDropZoneOver: boolean = false;
+  private storage: any;
 
 
-  constructor(private uploadingService: UploadingService) { }
+  constructor(private uploadingService: UploadingService) {
+    this.storage = localStorage;
+  }
+
 
   ngOnInit() {
   }
-  
+
   fileOverBase(event): void {
     this.hasBaseDropZoneOver = event;
   }
@@ -33,31 +39,26 @@ export class UploadPage implements OnInit {
 
     });
   }
-  
+
 
 
 
   uploadFiles() {
-	  
+
     let files = this.getFiles();
     let requests = [];
-	
+
+    console.log(this.storage.getItem("access_token"));
+
     console.log("files", files);
     files.forEach((file) => {
       let formData = new FormData();
-      formData.append('file' , file.rawFile, file.name);
-      requests.push(this.uploadingService.uploadFormData(formData));
-      
+	  formData.append('file' , file.rawFile, file.name);
+      requests.push(this.uploadingService.uploadFormData(formData, file.name));
+
     });
- 
-    concat(...requests).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {  
-        console.log(err);
-      }
-    );
+
+
   }
 
 }
