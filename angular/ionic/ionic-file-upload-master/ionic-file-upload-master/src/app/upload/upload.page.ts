@@ -19,6 +19,7 @@ export class UploadPage implements OnInit {
   public fileUploader: FileUploader = new FileUploader({});
   public hasBaseDropZoneOver: boolean = false;
   private storage: any;
+  public caption;
 
 
   constructor(private uploadingService: UploadingService) {
@@ -36,7 +37,6 @@ export class UploadPage implements OnInit {
   getFiles(): FileLikeObject[] {
     return this.fileUploader.queue.map((fileItem) => {
       return fileItem.file;
-
     });
   }
 
@@ -49,12 +49,15 @@ export class UploadPage implements OnInit {
     let requests = [];
 
     console.log(this.storage.getItem("access_token"));
+    console.log(this.caption);
+//    this.storage.setItem("caption", this.caption);
+//    console.log(this.storage.getItem("caption"));
 
     console.log("files", files);
     files.forEach((file) => {
       let formData = new FormData();
 	  formData.append('file' , file.rawFile, file.name);
-      requests.push(this.uploadingService.uploadFormData(formData, file.name));
+      requests.push(this.uploadingService.uploadFormData(formData, file.name, this.caption));
 
     });
 

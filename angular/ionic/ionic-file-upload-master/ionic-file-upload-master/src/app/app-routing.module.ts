@@ -7,6 +7,8 @@ const routes: Routes = [
   { path: 'upload', loadChildren: './upload/upload.module#UploadPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'signin', loadChildren: './signin/signin.module#SigninPageModule' },
+  { path: 'popover', loadChildren: './popover/popover.module#PopoverPageModule' },
+  { path: 'users', loadChildren: './users/users.module#UsersPageModule' },
 ];
 
 @NgModule({

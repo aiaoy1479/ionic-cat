@@ -13,20 +13,22 @@ export class SigninPage implements OnInit {
   constructor(public httpClient: HttpClient) { }
 
   ngOnInit() {}
-  
+
+  // ตรงส่วนของ login ใช้โมเดลของ loopback ที่มีอยู่แล้ว
+
   signForm() {
-	  
+
 	  this.httpClient.post('http://localhost:3000/api/Users', this.user).subscribe(
       (res) => {
         console.log(res);
 		this.success = "success";
       },
-      (err) => {  
+      (err) => {
         console.log(err);
 		this.success = "error";
       }
     );
-	  
+
 	  console.log(this.user)
   }
 

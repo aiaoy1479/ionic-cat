@@ -12,15 +12,20 @@ export class UploadingService {
     this.storage = localStorage;
   }
 
-  public uploadFormData(formData, filename) {
+  public uploadFormData(formData, filename, caption) {
+    console.log(caption);
     this.http.post(this.LOOPBACK_API_SERVER + '/api/cats?access_token=' + this.storage.getItem("access_token"),
      { "name": filename,
-      "userId": this.storage.getItem("userId")
+      "userId": this.storage.getItem("userId"),
+      "caption": caption
     }).subscribe(
       (res) =>
       {
         this.http.post<any>(this.LOOPBACK_API_SERVER + '/api/storages/keep1/upload/',formData).subscribe(
-          (res) => {console.log(res);},
+          (res) => {
+            console.log(res);
+            console.log("Upload success!");
+          },
           (err) => {console.log(err);}
         );
       },

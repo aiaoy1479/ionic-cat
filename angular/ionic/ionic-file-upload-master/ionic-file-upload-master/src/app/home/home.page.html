@@ -2,9 +2,9 @@
 	<ion-toolbar>
 
 		<ion-buttons slot="secondary">
-			<ion-button>
-				<ion-icon name="more"></ion-icon>
-			</ion-button>
+			<button (click)="logout()" >
+  			<ion-icon name="log-out"></ion-icon>
+			</button>
 
 		</ion-buttons>
 
@@ -26,6 +26,8 @@
 
 				<ion-card-content>
 					<ion-img [src]="item[0]"></ion-img>
+					####: {{item[3]}}
+					<br>
 					<ion-button color="light" (click)="presentAlertConfirm(item)">
 						<ion-icon name="trash"></ion-icon>
 					</ion-button>
@@ -41,13 +43,17 @@
 
 		<ion-buttons slot="secondary">
 
-			<ion-button>
+			<ion-button href="/home">
 	      <ion-icon name="home"></ion-icon>
 	    </ion-button>
 
 		<ion-button href="/upload">
 	      <ion-icon name="md-cloud-upload"></ion-icon>
 	    </ion-button>
+
+		<ion-button href="/users">
+			<ion-icon name="contacts"></ion-icon>
+		</ion-button>
 
 	    <ion-button>
 	      <ion-icon name="md-information-circle"></ion-icon>
